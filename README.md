@@ -26,11 +26,11 @@ Para ejecutar este proyecto, asegúrate de tener instalado:
 
 
 ## Accesos
-Frontend: http://localhost:8080
-Backend health: http://localhost:5000/api/health
-Backend team: http://localhost:5000/api/team
-Backend info: http://localhost:5000/api/info
-Portainer: http://localhost:9000
+* Frontend: http://localhost:8080
+* Backend health: http://localhost:5000/api/health
+* Backend team: http://localhost:5000/api/team
+* Backend info: http://localhost:5000/api/info
+* Portainer: http://localhost:9000
 
 ---
 
