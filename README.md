@@ -23,9 +23,36 @@ Para ejecutar este proyecto, asegúrate de tener instalado:
 1. [Docker Desktop](https://www.docker.com/products/docker-desktop/) (o Docker Engine con Compose).
 2. [Git](https://git-scm.com/).
 
-## Instrucciones de Ejecución
 
-1. **Clonar el repositorio:**
-   ```bash
-   git clone https://github.com/ValentinaPertile/is-2026-checkpoint-01
-   cd is-2026-checkpoint-01
+## Accesos
+Frontend: http://localhost:8080
+Backend health: http://localhost:5000/api/health
+Backend team: http://localhost:5000/api/team
+Backend info: http://localhost:5000/api/info
+Portainer: http://localhost:9000
+
+---
+
+## Estructura del proyecto
+
+```text
+is-2026-checkpoint-01/
+├── docker-compose.yml
+├── .env.example
+├── .gitignore
+├── README.md
+├── frontend/
+│   ├── Dockerfile
+│   ├── .dockerignore
+│   └── html/
+│       ├── index.html
+│       └── app.js
+├── backend/
+│   ├── Dockerfile
+│   ├── .dockerignore
+│   ├── requirements.txt
+│   └── app.py
+├── database/
+│   └── init.sql
+└── portainer/
+

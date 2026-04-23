@@ -1,42 +1,96 @@
 services:
-  database:
-    image: postgres:16-alpine
-    container_name: database
-    environment:
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-    volumes:
-      - db_data:/var/lib/postgresql/data
-      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+  frontend:
+    build:
+      context: ./frontend
+    container_name: teamboard-frontend
+    ports:
+      - "${FRONTEND_PORT}:8080"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - teamboard-network
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 128M
 
   backend:
-    build: ./backend
-    container_name: backend
-    ports:
-      - "5000:5000"
-    depends_on:
-      - database
+    build:
+      context: ./backend
+    container_name: teamboard-backend
     environment:
+      SERVICE_NAME: teamboard-backend
+      SERVICE_VERSION: 1.0.0
       DB_HOST: database
-      # Agrega aquí las demás variables de entorno que necesites
-
-  frontend:
-    build: ./frontend
-    container_name: frontend
+      DB_PORT: 5432
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     ports:
-      - "8080:8080"
+      - "${BACKEND_PORT}:5000"
     depends_on:
-      - backend
+      database:
+        condition: service_healthy
+    networks:
+      - teamboard-network
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 256M
+
+  database:
+    image: postgres:16-alpine
+    container_name: teamboard-database
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - teamboard-network
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 256M
 
   portainer:
     image: portainer/portainer-ce:latest
-    container_name: portainer
+    container_name: teamboard-portainer
     ports:
-      - "9000:9000"
+      - "${PORTAINER_PORT}:9000"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data
+    networks:
+      - teamboard-network
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 256M
 
 volumes:
-  db_data:
+  postgres_data:
   portainer_data:
+
+networks:
+  teamboard-network:
+    driver: bridge
+
+
