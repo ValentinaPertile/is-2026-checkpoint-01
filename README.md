@@ -1,3 +1,4 @@
+
 # Proyecto IS-2026 - Checkpoint 01
 
 ## Descripción
