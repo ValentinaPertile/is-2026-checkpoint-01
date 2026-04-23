@@ -1,23 +1,25 @@
-# Usar imagen slim según requerimientos [cite: 133, 150]
 FROM python:3.12-slim
 
-# Crear usuario no-root para seguridad 
-RUN useradd -m myuser
-USER myuser
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
-# Copiar requirements primero para aprovechar el caché de capas 
-COPY --chown=myuser:myuser requirements.txt .
+COPY requirements.txt /app/requirements.txt
 
-# Instalar dependencias
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir --upgrade pip \
+    && pip install --no-cache-dir -r /app/requirements.txt
 
-# Copiar el código fuente
-COPY --chown=myuser:myuser app.py .
+COPY app.py /app/app.py
 
-# Exponer el puerto 5000 [cite: 137]
+RUN useradd --create-home --shell /bin/bash appuser \
+    && chown -R appuser:appuser /app
+
+USER appuser
+
 EXPOSE 5000
 
-# Comando de ejecución (usando Gunicorn como sugiere el PDF) [cite: 137]
-CMD ["python", "-m", "gunicorn", "--bind", "0.0.0.0:5000", "app:app"]
+HEALTHCHECK --interval=10s --timeout=5s --retries=5 CMD python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:5000/api/health')"
+
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app:app"]
+
