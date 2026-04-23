@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TeamBoard App</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Arial, Helvetica, sans-serif; background: #f4f6f8; color: #1f2937; }
+    .container { max-width: 1100px; margin: 40px auto; background: #ffffff; padding: 24px; border-radius: 14px; box-shadow: 0 6px 24px rgba(0,0,0,0.08); }
+    h1 { margin: 0 0 8px 0; font-size: 2rem; }
+    .subtitle { margin: 0 0 20px 0; color: #4b5563; font-size: 1rem; }
+    .status { display: inline-block; padding: 10px 16px; border-radius: 999px; font-weight: bold; margin-bottom: 20px; border: 1px solid transparent; }
+    .status.online { background: #dcfce7; color: #166534; border-color: #86efac; }
+    .status.offline { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
+    .table-wrapper { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    thead { background: #111827; color: #ffffff; }
+    th, td { padding: 12px; border: 1px solid #e5e7eb; text-align: left; vertical-align: middle; }
+    tbody tr:nth-child(even) { background: #f9fafb; }
+    .service-status { display: inline-block; padding: 4px 10px; border-radius: 999px; font-size: 0.9rem; font-weight: bold; background: #e5e7eb; color: #374151; }
+    .service-status.running { background: #dcfce7; color: #166534; }
+    .service-status.stopped, .service-status.error, .service-status.offline { background: #fee2e2; color: #991b1b; }
+    .message { margin-top: 18px; color: #6b7280; }
+    .message.error { color: #991b1b; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <h1>TeamBoard App</h1>
+    <p class="subtitle">Grupo: Grupo 01</p>
+    <div id="backend-status" class="status offline">Backend: verificando...</div>
+    <div class="table-wrapper">
+      <table aria-label="Tabla de integrantes del equipo">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Legajo</th>
+            <th>Feature</th>
+            <th>Servicio</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody id="team-table-body"></tbody>
+      </table>
+    </div>
+    <p id="message" class="message">Cargando datos del backend...</p>
+  </main>
+  <script src="./app.js"></script>
+</body>
+</html>
