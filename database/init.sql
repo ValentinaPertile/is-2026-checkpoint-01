@@ -4,7 +4,7 @@ CREATE TABLE members (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     apellido VARCHAR(100) NOT NULL,
-    legajo VARCHAR(20) NOT NULL UNIQUE,
+    legajo VARCHAR(20) NOT NULL,
     feature VARCHAR(50) NOT NULL,
     servicio VARCHAR(50) NOT NULL,
     estado VARCHAR(30) NOT NULL
