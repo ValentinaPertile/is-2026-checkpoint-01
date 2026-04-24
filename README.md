@@ -26,11 +26,11 @@ Para ejecutar este proyecto, asegúrate de tener instalado:
 
 
 ## Accesos
-Frontend: http://localhost:8080
-Backend health: http://localhost:5000/api/health
-Backend team: http://localhost:5000/api/team
-Backend info: http://localhost:5000/api/info
-Portainer: http://localhost:9000
+* Frontend: http://localhost:8080
+* Backend health: http://localhost:5000/api/health
+* Backend team: http://localhost:5000/api/team
+* Backend info: http://localhost:5000/api/info
+* Portainer: http://localhost:9000
 
 ---
 
@@ -57,3 +57,30 @@ is-2026-checkpoint-01/
 │   └── init.sql
 └── portainer/
 
+``` 
+
+---
+## Portainer
+
+Portainer permite visualizar y monitorear los contenedores Docker del proyecto desde el navegador.
+
+### Acceso
+
+Abrir: http://localhost:9000
+
+### Primer ingreso
+
+La primera vez que se abre Portainer, se solicita crear un usuario administrador.
+
+### Qué verificar
+
+Dentro de Portainer deben verse los contenedores del proyecto:
+
+- teamboard-frontend
+- teamboard-backend
+- teamboard-database
+- teamboard-portainer
+
+### Evidencia
+
+![Portainer Containers](docs/img/portainer-containers.png)
