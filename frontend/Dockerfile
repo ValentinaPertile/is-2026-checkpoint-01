@@ -8,4 +8,5 @@ COPY html/ ./html/
 EXPOSE 8080
 
 # El comando corregido: le decimos explícitamente que sirva la carpeta 'html'
-CMD ["python3", "-m", "http.server", "8080", "--directory", "html"]
+WORKDIR /app/html
+CMD ["python3", "-m", "http.server", "8080"]
