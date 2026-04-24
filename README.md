@@ -57,26 +57,30 @@ is-2026-checkpoint-01/
 │   └── init.sql
 └── portainer/
 
-## Instalación y Ejecución
+``` 
 
-1. Clonar el repositorio:
-```bash
-   git clone https://github.com/ValentinaPertile/is-2026-checkpoint-01
-   cd is-2026-checkpoint-01
-```
+---
+## Portainer
 
-2. Configurar las variables de entorno:
-```bash
-   cp .env.example .env
-   # Completar los valores en .env
-```
+Portainer permite visualizar y monitorear los contenedores Docker del proyecto desde el navegador.
 
-3. Levantar los servicios:
-```bash
-   docker compose up -d --build
-```
+### Acceso
 
-4. Verificar que todos los servicios están corriendo:
-```bash
-   docker compose ps
-```
+Abrir: http://localhost:9000
+
+### Primer ingreso
+
+La primera vez que se abre Portainer, se solicita crear un usuario administrador.
+
+### Qué verificar
+
+Dentro de Portainer deben verse los contenedores del proyecto:
+
+- teamboard-frontend
+- teamboard-backend
+- teamboard-database
+- teamboard-portainer
+
+### Evidencia
+
+![Portainer Containers](docs/img/portainer-containers.png)
