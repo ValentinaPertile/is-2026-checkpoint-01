@@ -1,6 +1,4 @@
-DROP TABLE IF EXISTS members;
-
-CREATE TABLE members (
+CREATE TABLE IF NOT EXISTS members (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     apellido VARCHAR(100) NOT NULL,
@@ -12,8 +10,6 @@ CREATE TABLE members (
 
 INSERT INTO members (nombre, apellido, legajo, feature, servicio, estado)
 VALUES
-    ('Maria Luana', 'Suarez Pavicicho', '33210O', 'Feature 04', 'database', 'running'),
-    ('Macarena', 'Romero Olmo ', '33372', 'Feature 02', 'frontend', 'running'),
-    ('Valentina', 'Pertila de la Vega', '33288', 'Feature 03', 'backend', 'running'),
-    ('Valentina', 'Pertile de la Vega', '33288', 'Feature 01', 'compose/readme', 'running'),
-    ('Macarena', 'Romero Olmo', '33372', 'Feature 05', 'portainer', 'running');
+    ('Maria Luana', 'Suarez Pavicich', '33210', 'Feature 04', 'database', 'running'),
+    ('Macarena', 'Romero Olmo', '33372', 'Feature 02 y 05', 'frontend y portainer', 'running'),
+    ('Valentina', 'Pertile de la Vega', '33288', 'Feature 01 y 03', 'backend y compose/readme', 'running');
