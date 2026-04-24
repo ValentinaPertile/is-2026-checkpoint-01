@@ -57,3 +57,26 @@ is-2026-checkpoint-01/
 │   └── init.sql
 └── portainer/
 
+## Instalación y Ejecución
+
+1. Clonar el repositorio:
+```bash
+   git clone https://github.com/ValentinaPertile/is-2026-checkpoint-01
+   cd is-2026-checkpoint-01
+```
+
+2. Configurar las variables de entorno:
+```bash
+   cp .env.example .env
+   # Completar los valores en .env
+```
+
+3. Levantar los servicios:
+```bash
+   docker compose up -d --build
+```
+
+4. Verificar que todos los servicios están corriendo:
+```bash
+   docker compose ps
+```
