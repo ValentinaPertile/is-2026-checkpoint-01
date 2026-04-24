@@ -83,4 +83,4 @@ Dentro de Portainer deben verse los contenedores del proyecto:
 
 ### Evidencia
 
-Ver capturas de pantalla en la carpeta del proyecto mostrando los contenedores corriendo.
+![Portainer Containers](docs/img/portainer-containers.png)
